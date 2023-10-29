@@ -1,0 +1,5 @@
+container:
+  name: laravel
+  port: 5000
+
+replicaCount: 1
