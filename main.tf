@@ -56,4 +56,5 @@ module "app" {
   domain          = var.domain
   certificate_arn = module.alb.certificate_arn
   ecr_repository  = module.ecr.ecr_repository_url
+  depend          = module.rds
 }

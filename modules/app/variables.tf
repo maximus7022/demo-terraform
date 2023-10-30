@@ -9,3 +9,5 @@ variable "certificate_arn" {
 variable "domain" {
   type = string
 }
+
+variable "depend" {}

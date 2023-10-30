@@ -1,18 +1,26 @@
 data "aws_ssm_parameter" "host_secret" {
   name = "rds-host"
+
+  depends_on = [var.depend]
 }
 
 data "aws_ssm_parameter" "database_secret" {
   name = "rds-database"
+
+  depends_on = [var.depend]
 }
 
 data "aws_ssm_parameter" "username_secret" {
   name = "rds-username"
+
+  depends_on = [var.depend]
 }
 
 data "aws_ssm_parameter" "password_secret" {
   name            = "rds-password"
   with_decryption = true
+
+  depends_on = [var.depend]
 }
 
 resource "helm_release" "app_release" {
