@@ -12,14 +12,14 @@ module "ecr" {
   repository_name = var.repository_name
 }
 
-# module "jenkins" {
-#   source    = "./modules/jenkins"
-#   vpc_id    = module.network.vpc_id
-#   vpc_cidr  = var.vpc_cidr
-#   subnet_id = module.network.private_subnet_ids[0]
+module "jenkins" {
+  source    = "./modules/jenkins"
+  vpc_id    = module.network.vpc_id
+  vpc_cidr  = var.vpc_cidr
+  subnet_id = module.network.private_subnet_ids[0]
 
-#   depends_on = [module.network]
-# }
+  depends_on = [module.network]
+}
 
 module "alb" {
   source  = "./modules/alb"
@@ -28,6 +28,8 @@ module "alb" {
   tg_name = var.tg_name
   subnets = module.network.public_subnet_ids
   domain  = var.domain
+
+  depends_on = [module.jenkins]
 }
 
 module "rds" {
