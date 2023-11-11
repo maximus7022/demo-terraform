@@ -1,0 +1,80 @@
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+*.terraform.lock.hcl
+*.terraform
+*terraform*
+
+**/.terraform/*
+# logs
+*.log
+
+# Directories
+.terraform/
+.terraform/**
+#.vagrant/
+
+# SSH Keys
+*.pem
+
+# Backup files
+*.bak
+
+# Ignored Terraform files
+# *gitignore*
+
+# Ignore Mac .DS_Store files
+.DS_Store
+
+# Ignored vscode files
+.vscode/
+
+# Ignore Any Generated JSON Files
+# operations/automation-script/apply.json
+# operations/automation-script/configversion.json
+# operations/automation-script/run.template.json
+# operations/automation-script/run.json
+# operations/automation-script/variable.template.json
+# operations/automation-script/variable.json
+# operations/automation-script/workspace.template.json
+# operations/automation-script/workspace.json
+# operations/sentinel-policies-scripts/create-policy.template.json
+# operations/sentinel-policies-scripts/create-policy.json
+# operations/variable-scripts/variable.template.json
+# operations/variable-scripts/variable.json
+
+# Sentinel runtime directory
+#.sentinel
+
+# From Alex .gitignore file
+
+# Compiled files
+*.tfstate
+*.tfstate.backup
+.terraform.tfstate.lock.info
+.DS_Store
+.vscode
+.terraform.lock.hcl
+terraform.tfvars
+secrets.hcl
+secret.tfvars
+
+# Module directory
+.terraform/
+.terragrunt-cache/
+
+lib .\roteros.dll loaded
+*.py[cod]
+__pycache__
+.pytest_cache/
+*.egg-info
+pip-wheel-metadata
+.env
+.venv
+
+tags
+*~
+*.sw[op]
+.vscode
+.idea
