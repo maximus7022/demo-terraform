@@ -1,7 +1,11 @@
+# ====================RETRIEVING EXISTING HOSTED ZONE DATA====================
+
 data "aws_route53_zone" "hosted_zone" {
   name         = var.domain
   private_zone = false
 }
+
+# ====================CREATING DNS RECORD FOR JENKINS DASHBOARD====================
 
 resource "aws_route53_record" "jenkins_lb_record" {
   name    = "jenkins.${var.domain}"
@@ -15,11 +19,15 @@ resource "aws_route53_record" "jenkins_lb_record" {
   }
 }
 
+# ====================ORDERING ACM CERTIFICATE====================
+
 resource "aws_acm_certificate" "cert" {
   domain_name               = var.domain
   subject_alternative_names = ["*.${var.domain}"]
   validation_method         = "DNS"
 }
+
+# ====================CERTIFICATE VALIDATION====================
 
 resource "aws_route53_record" "validation" {
   for_each = {
