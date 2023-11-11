@@ -1,3 +1,5 @@
+# ====================SECURITY GROUP FOR EKS API====================
+
 resource "aws_security_group" "eks_api_private_access" {
   name   = "eks-api-private-access"
   vpc_id = var.vpc_id
@@ -23,7 +25,8 @@ resource "aws_security_group_rule" "outbound_rule_allow_all" {
   security_group_id = aws_security_group.eks_api_private_access.id
 }
 
-# IAM ROLE FOR EKS CLUSTER
+# ====================IAM ROLE FOR EKS CLUSTER====================
+
 data "aws_iam_policy_document" "demo_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -51,7 +54,8 @@ resource "aws_iam_role_policy_attachment" "demo_AmazonEKSVPCResourceController" 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
 }
 
-# IAM ROLE FOR NODES
+# ====================IAM ROLE FOR NODES====================
+
 resource "aws_iam_role" "demo_node_role" {
   name = "eks-node-group-demo-role"
 
@@ -82,7 +86,8 @@ resource "aws_iam_role_policy_attachment" "demo_node-AmazonEC2ContainerRegistryR
   role       = aws_iam_role.demo_node_role.name
 }
 
-#IAM ROLE FOR SERVICE ACCOUNT
+# ====================IAM ROLE FOR SERVICE ACCOUNT====================
+
 data "aws_iam_policy_document" "demo_service_role_policy" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -106,6 +111,8 @@ data "aws_iam_policy_document" "demo_service_role_policy" {
     }
   }
 }
+
+# ====================ALB CONTROLLER IAM ROLE====================
 
 resource "aws_iam_role" "aws_load_balancer_controller_role" {
   assume_role_policy = data.aws_iam_policy_document.demo_service_role_policy.json
