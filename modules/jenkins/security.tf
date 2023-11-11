@@ -1,10 +1,10 @@
 resource "aws_security_group" "jenkins_sg" {
   name        = "Jenkins Security Group"
-  description = "Allow 8080 access"
+  description = "Allow 80 access"
   vpc_id      = var.vpc_id
 
   dynamic "ingress" {
-    for_each = ["8080"]
+    for_each = ["80"]
     content {
       from_port   = ingress.value
       to_port     = ingress.value
