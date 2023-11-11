@@ -1,10 +1,10 @@
 resource "aws_security_group" "demo_lb_sg" {
   name        = "Load Balancer Security Group"
-  description = "Allow 80, 443 and 8080 access"
+  description = "Allow 80, 443 access"
   vpc_id      = var.vpc_id
 
   dynamic "ingress" {
-    for_each = ["80", "443", "8080"]
+    for_each = ["80", "443"]
     content {
       from_port   = ingress.value
       to_port     = ingress.value
