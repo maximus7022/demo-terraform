@@ -1,3 +1,5 @@
+# ====================RETRIEVING DB CREDENTIALS====================
+
 data "aws_ssm_parameter" "host_secret" {
   name = "rds-host"
 
@@ -22,6 +24,8 @@ data "aws_ssm_parameter" "password_secret" {
 
   depends_on = [var.depend]
 }
+
+# ====================FIRST APP RELEASE WITH HELM====================
 
 resource "helm_release" "app_release" {
   name  = "laravel-app-release"
@@ -59,6 +63,8 @@ resource "helm_release" "app_release" {
     value = data.aws_ssm_parameter.password_secret.value
   }
 }
+
+# ====================INGRESS TO EXPOSE APPLICATION TO THE WEB====================
 
 resource "kubernetes_ingress_v1" "laravel_ingress" {
   wait_for_load_balancer = true
@@ -100,7 +106,11 @@ resource "kubernetes_ingress_v1" "laravel_ingress" {
       }
     }
   }
+
+  depends_on = [helm_release.app_release]
 }
+
+# ====================APPLICATION DNS RECORD====================
 
 data "aws_route53_zone" "hosted_zone" {
   name         = var.domain
