@@ -1,3 +1,5 @@
+# ============ALB CONTROLLER DEPLOYMENT============
+
 resource "helm_release" "alb_controller" {
   count      = 1
   name       = "aws-load-balancer-controller"
@@ -41,5 +43,5 @@ resource "helm_release" "alb_controller" {
     value = "false"
   }
 
-  depends_on = [kubernetes_namespace.aws_observability]
+  depends_on = [null_resource.config_update]
 }
